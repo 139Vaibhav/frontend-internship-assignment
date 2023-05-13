@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, filter } from 'rxjs';
-import { Book, Doc } from 'src/app/core/models/book-response.model';
+import { Book } from 'src/app/core/models/book-response.model';
 import { SearchService } from 'src/app/core/services/search.services';
 import { SharedModule } from 'src/app/shared/shared.module';
 @Component({
@@ -10,6 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   styleUrls: ['./home.component.scss'],
   providers: [SharedModule]
 })
+
 export class HomeComponent implements OnInit {
   bookSearch: FormControl;
   books: Book[] = []// sample data for booksList parameter
@@ -119,16 +120,15 @@ export class HomeComponent implements OnInit {
 
     if (this.totalPages > 7) {
       if (this.currentPage < 3) {
-        // if there are more than 7 pages, show first 3 and last 3 page numbers
+
         pageButtons.push(1, 2, 3);
-        pageButtons.push(-1); // use -1 to represent ellipsis (...)
+        pageButtons.push(-1);
         pageButtons.push(this.totalPages - 2, this.totalPages - 1, this.totalPages);
       } else {
         pageButtons.push(this.currentPage - 2, this.currentPage - 1, this.currentPage);
         pageButtons.push(this.currentPage + 1, this.currentPage + 2);
       }
     } else {
-      // otherwise, show all page numbers
       for (let i = 1; i <= this.totalPages; i++) {
         pageButtons.push(i);
       }

@@ -37,8 +37,10 @@ export interface Book {
   printdisabled: boolean;
   lending_edition: string;
   lending_identifier: string;
-  authors: Author[];
-  first_publish_year: number;
+  authors?: Author[];
+  author_key?: string[];
+  author_name?: string[];
+  first_publish_year?: number;
   ia: string;
   public_scan: boolean;
   has_fulltext: boolean;
@@ -51,4 +53,10 @@ export interface BookResponse {
   subject_type: string;
   work_count: number;
   works: Book[];
+}
+
+export interface SearchResponse {
+  start: number
+  numFound: number
+  docs: any[]
 }
